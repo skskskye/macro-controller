@@ -15,11 +15,12 @@ t4 = ""
 t5 = ""
 t6 = ""
 
-connected_label = ""
+
+
 background_color = ""
 text_color = ""
 
-t1input = ""
+t1input = "c"
 t2input = ""
 t3input = ""
 t4input = ""
@@ -61,8 +62,6 @@ def handling_ard_input():
     global background_color
     global text_color
 
-    global connected_label
-
     global is_program1_open
     global is_program2_open
     global is_program3_open
@@ -96,10 +95,8 @@ def handling_ard_input():
     while True:
         try:
             ard = serial.Serial(port = port_type, baudrate = amount_baudrate)
-            connected_label.config(font=("Pixellari", 15), bg=background_color, fg=text_color, text="Connected!")
             is_connected = True
         except: 
-            connected_label.config(font=("Pixellari", 15), bg=background_color, fg=text_color, text="Not Connected!")
             is_connected = False
 
         if is_connected == True:    
@@ -196,8 +193,6 @@ def window():
     global t4
     global t5
     global t6
-
-    global connected_label
     
     global temp_is_macro_on1
     global temp_is_macro_on2
@@ -206,8 +201,7 @@ def window():
     global temp_is_macro_on5
     global temp_is_macro_on6
 
-    global background_color
-    global text_color
+    
     
     
     #dimensions
@@ -339,12 +333,6 @@ def window():
     apply = Button(window, text="Apply macro", command=apply_macro, height=3, width=22)
     apply.config(bg=button_color)
     apply.place(x = 325, y = 410)
-
-    #connected label
-    
-    connected_label = Label(window, text="Not Connected")
-    connected_label.config(font=("Pixellari", 15), bg=background_color, fg=text_color, text="Not Connected!")
-    connected_label.place(y = 440, x = 10)
 
     #packinge elements
     title.pack()
