@@ -89,19 +89,20 @@ def handling_ard_input():
     global t4input
     global t5input
     global t6input
-
     global is_connected
-
-    while True:
+    while is_connected == False:
         try:
             ard = serial.Serial(port = port_type, baudrate = amount_baudrate)
             is_connected = True
-        except: 
+            print("connected!")
+            break
+        except:
             is_connected = False
-
-        if is_connected == True:    
+            print("error connecting, might not be connected?")
+    while True:
+        if is_connected == True:  
             data = str(ard.readline())
-            #print(data)
+            print(data) 
             for i in range(len(data)):
                 if data[i] == "1" and is_program1_open == False:
                     print("open program!")
