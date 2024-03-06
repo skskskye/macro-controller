@@ -1,5 +1,6 @@
 import serial
 import threading
+import keyboard
 from tkinter import *
 from tkinter import filedialog
 import win32.lib.win32con as win32con
@@ -102,38 +103,26 @@ def handling_ard_input():
     while True:
         if is_connected == True:  
             data = str(ard.readline())
-            print(data) 
+            #print(data) 
             for i in range(len(data)):
+                #Key 1
                 if data[i] == "1" and is_program1_open == False:
-                    print("open program!")
                     is_program1_open = True
-                    os.startfile(file_to_open1)
-                elif data[i] == "2" and is_program2_open == False:
-                    is_program2_open = True
-                    os.startfile(file_to_open2)
-                elif data[i] == "3" and is_program3_open == False:
-                    is_program3_open = True
-                    os.startfile(file_to_open3)
-                elif data[i] == "4" and is_program4_open == False:
-                    is_program4_open = True
-                    os.startfile(file_to_open4)
-                elif data[i] == "5" and is_program5_open == False:
-                    is_program5_open = True
-                    os.startfile(file_to_open5)
-                elif data[i] == "6" and is_program6_open == False:
-                    is_program6_open = True
-                    os.startfile(file_to_open6)
+                    if is_macro_on1:
+                        print("macro!")
+                        keyboard.write(t1input)
+                    else:
+                        print("opening file!")
+                        os.startfile(file_to_open1)
+                elif data[i] == "0" and is_program1_open == True:
+                    #print("button let go")
+                    is_program1_open = False
 
-            is_program1_open = False
-            is_program2_open = False
-            is_program3_open = False
-            is_program4_open = False
-            is_program5_open = False
-            is_program6_open = False
         else:
             print("connection failed! arduino possibly not plugged in?")
 
 def clicked():
+
     global is_connected
 
     global is_macro_on1
