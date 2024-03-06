@@ -23,3 +23,6 @@ The libaries used for hexakey are the following:
 the languages that were used were:
 - c++ with the arduino framework
 - python 3.12.1
+
+# setup
+to setup this software you need to compile the arduino code to an arduino, and just run the py script. make sure that the com port for the ardunio is only opened through one program, if that isnt happening the com port can't be accessed.
