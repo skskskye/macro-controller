@@ -21,7 +21,7 @@ t6 = ""
 background_color = ""
 text_color = ""
 
-t1input = "c"
+t1input = ""
 t2input = ""
 t3input = ""
 t4input = ""
