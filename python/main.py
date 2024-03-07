@@ -3,8 +3,8 @@ import threading
 import keyboard
 from tkinter import *
 from tkinter import filedialog
-import win32.lib.win32con as win32con
 import os
+import json
 
 port_type = "COM3"
 amount_baudrate = 9600
@@ -16,17 +16,21 @@ t4 = ""
 t5 = ""
 t6 = ""
 
+background_color = "#242D61"
+button_color = "#C3C3C3"
+text_color = "white"
 
+with open(r'Data\macros.json') as file:
+    file_contents = json.load(file)
+t1input = file_contents["macro1"]
+t2input = file_contents["macro2"]
+t3input = file_contents["macro3"]
+t4input = file_contents["macro4"]
+t5input = file_contents["macro5"]
+t6input = file_contents["macro6"]
 
-background_color = ""
-text_color = ""
+print(t1input, t2input, t3input, t4input, t5input, t6input)
 
-t1input = ""
-t2input = ""
-t3input = ""
-t4input = ""
-t5input = ""
-t6input = ""
 
 is_macro_on1 = 0
 is_macro_on2 = 0
@@ -51,13 +55,17 @@ is_program6_open = False
 
 is_connected = False
 
-file_to_open1 = "calc"
-file_to_open2 = "calc"
-file_to_open3 = "calc"
-file_to_open4 = "calc"
-file_to_open5 = "calc"
-file_to_open6 = "calc"
+with open(r'Data\locations.json') as location_file:
+    contents = json.load(location_file)
 
+file_to_open1 = contents["file1"]
+file_to_open2 = contents["file2"]
+file_to_open3 = contents["file3"]
+file_to_open4 = contents["file4"]
+file_to_open5 = contents["file5"]
+file_to_open6 = contents["file6"]
+
+print(file_to_open4)
 
 def handling_ard_input():
     global background_color
@@ -99,7 +107,7 @@ def handling_ard_input():
             break
         except:
             is_connected = False
-            print("error connecting, might not be connected?")
+            #print("error connecting, might not be connected?")
     while True:
         if is_connected == True:  
             data = str(ard.readline())
@@ -118,6 +126,10 @@ def handling_ard_input():
                     #print("button let go")
                     is_program1_open = False
 
+                
+                
+                
+
         else:
             print("connection failed! arduino possibly not plugged in?")
 
@@ -131,6 +143,7 @@ def clicked():
     global is_macro_on4
     global is_macro_on5
     global is_macro_on6
+
     is_macro_on1 = temp_is_macro_on1.get()
     is_macro_on2 = temp_is_macro_on2.get()
     is_macro_on3 = temp_is_macro_on3.get()
@@ -161,19 +174,25 @@ def apply_macro():
     global t5input
     global t6input
     
-    t1input = t1.get(1.0, "end-1c")
+    t1input = t1.get(1.0, "end-1c")     
     t2input = t2.get(1.0, "end-1c")
     t3input = t3.get(1.0, "end-1c")
     t4input = t4.get(1.0, "end-1c")
     t5input = t5.get(1.0, "end-1c")
     t6input = t6.get(1.0, "end-1c")
 
-    print("txt1", t1input)
-    print("txt2", t2input)
-    print("txt3", t3input)
-    print("txt4", t4input)
-    print("txt5", t5input)
-    print("txt6", t6input)
+    data = {
+            'macro1': t1input, 
+            'macro2': t2input, 
+            'macro3': t3input,
+            'macro4': t4input,
+            'macro5': t5input,
+            'macro6': t6input
+            }
+    
+    with open(r"data\macros.json", 'w') as f:
+        json.dump(data, f)
+    print(data)
 
 
 def window():
@@ -192,16 +211,13 @@ def window():
     global temp_is_macro_on6
 
     
-    
+    global background_color
+    global button_color
+    global text_color
     
     #dimensions
     x_dimension = 500
     y_dimension = 480
-
-    #hex colours for elements
-    background_color = "#242D61"
-    button_color = "#C3C3C3"
-    text_color = "white"
 
     #window config
     window = Tk()
@@ -360,7 +376,23 @@ def get_file_dir(button):
         file_to_open6 = filedialog.askopenfilename()
         print(file_to_open6)
     
-    #print("key1", file_to_open1, "key2", file_to_open2, "key3", file_to_open3, "key4", file_to_open4, "key5", file_to_open5, "key6", file_to_open6)
+    data = {
+        "file1": file_to_open1, 
+        "file2": file_to_open2, 
+        "file3": file_to_open3, 
+        "file4": file_to_open4, 
+        "file5": file_to_open5, 
+        "file6": file_to_open6
+        }
+    print(data)
+    with open(r"data\locations.json", "w") as f:
+        json.dump(data, f)
+        
+    
+
+    
+    
+    
 
 #threading
 t1 = threading.Thread(target=handling_ard_input)
