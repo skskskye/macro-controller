@@ -6,8 +6,13 @@ from tkinter import filedialog
 import os
 import json
 
-port_type = "COM3"
+port_type = "COM13"
 amount_baudrate = 9600
+
+current_location = "location"
+current_macro = "macro"
+
+
 
 t1 = ""
 t2 = ""
@@ -126,15 +131,74 @@ def handling_ard_input():
                     #print("button let go")
                     is_program1_open = False
 
-                
-                
-                
+                #key 2
+                if data[i] == "3" and is_program2_open == False:
+                    is_program2_open = True
+                    if is_macro_on2:
+                        print("macro!")
+                        keyboard.write(t2input)
+                    else:
+                        print("opening file!")
+                        os.startfile(file_to_open2)
+                elif data[i] == "2" and is_program2_open == True:
+                    #print("button let go")
+                    is_program2_open = False
 
+                #key 3
+                if data[i] == "5" and is_program3_open == False:
+                    is_program3_open = True
+                    if is_macro_on3:
+                        print("macro!")
+                        keyboard.write(t3input)
+                    else:
+                        print("opening file!")
+                        os.startfile(file_to_open3)
+                elif data[i] == "4" and is_program3_open == True:
+                    #print("button let go")
+                    is_program3_open = False
+
+                #key 4
+                if data[i] == "7" and is_program4_open == False:
+                    is_program4_open = True
+                    if is_macro_on4:
+                        print("macro!")
+                        keyboard.write(t4input)
+                    else:
+                        print("opening file!")
+                        os.startfile(file_to_open4)
+                elif data[i] == "6" and is_program4_open == True:
+                    #print("button let go")
+                    is_program4_open = False
+
+                #key 5
+                if data[i] == "9" and is_program5_open == False:
+                    is_program5_open = True
+                    if is_macro_on5:
+                        print("macro!")
+                        keyboard.write(t5input)
+                    else:
+                        print("opening file!")
+                        os.startfile(file_to_open5)
+                elif data[i] == "8" and is_program5_open == True:
+                    #print("button let go")
+                    is_program5_open = False
+                
+                # #key 6
+                # if data[i] == "y" and is_program6_open == False:
+                #     is_program6_open = True
+                #     if is_macro_on6:
+                #         print("macro!")
+                #         keyboard.write(t6input)
+                #     else:
+                #         print("opening file!")
+                #         os.startfile(file_to_open6)
+                # elif data[i] == "n" and is_program6_open == True:
+                #     #print("button let go")
+                #     is_program6_open = False
         else:
             print("connection failed! arduino possibly not plugged in?")
 
 def clicked():
-
     global is_connected
 
     global is_macro_on1
@@ -158,7 +222,6 @@ def clicked():
     print("5: ", is_macro_on5)
     print("6: ", is_macro_on6)
     
-
 def apply_macro():
     global t1
     global t2
@@ -340,12 +403,59 @@ def window():
     apply.config(bg=button_color)
     apply.place(x = 325, y = 410)
 
+    #layout button this is the bane of my existance 
+
+    # layout = Button(window, text="Layouts", command=layout_window, height=1, width=6 )
+    # layout.config(bg=button_color)
+    # layout.place(x=10, y=10)
+
     #packinge elements
     title.pack()
 
     #looping ui
     window.mainloop()   
 
+# # def layout_window(): i HATE this :c
+#     global background_color
+#     global button_color
+#     global text_color
+#     root = Tk()
+#     root.geometry("200x200")
+#     root.configure(bg=background_color)
+#     root.title("layouts")
+
+#     #location stuff
+#     location_options = [
+#         "location1",
+#         "location2",
+#         "location3"
+#     ]
+
+#     #macro stuff 
+#     macro_options = [
+#         "macro1",
+#         "macro2",
+#         "macro3"
+#     ]
+
+#     #dropdown itself
+
+#     clicked = StringVar()
+
+#     macro_drop = OptionMenu(root, clicked, *macro_options)
+#     macro_drop.pack()
+
+#     root.mainloop()
+    
+
+def on_click(type):
+    global current_location
+    global current_macro
+
+    if type == "macro":
+        current_macro = clicked.get()
+    if type == "location":
+        current_location = clicked.get()
 def get_file_dir(button):
 
     #global vars
