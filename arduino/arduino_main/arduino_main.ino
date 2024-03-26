@@ -25,35 +25,39 @@ void loop() {
   int key5State = digitalRead(key5);
   int key6State = digitalRead(key6);
 
-  // if(key1State == HIGH){
-  //   Serial.println("0");
-  // }else{
-  //   Serial.println("1");
-  // }
+  if(key1State == HIGH){
+    Serial.println("0");
+  }else{
+    Serial.println("1");
+  }
 
-  // if(key2State == HIGH){
-  //   Serial.println("2");
-  // }else{
-  //   Serial.println("3");
-  // }
+  if(key2State == HIGH){
+    Serial.println("2");
+  }else{
+    Serial.println("3");
+  }
 
-  // if(key3State == HIGH){
-  //   Serial.println("4");
-  // }else{
-  //   Serial.println("5");
-  // }
+  if(key3State == HIGH){
+    Serial.println("4");
+  }else{
+    Serial.println("5");
+  }
 
-  // if(key4State == HIGH){
-  //   Serial.println("6");
-  // }else{
-  //   Serial.println("7");
-  // }
+  if(key4State == HIGH){
+    Serial.println("6");
+  }else{
+    Serial.println("7");
+  }
 
-  // if(key5State == HIGH){
-  //   Serial.println("8");
-  // }else{
-  //   Serial.println("9");
-  // }
+  if(key5State == HIGH){
+    Serial.println("8");
+  }else{
+    Serial.println("9");
+  }
 
-  Serial.println(key6State);
+  if(key6State == HIGH){
+    Serial.println("q");
+  }else{
+    Serial.println("w");
+  }
 }

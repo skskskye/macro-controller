@@ -183,18 +183,19 @@ def handling_ard_input():
                     #print("button let go")
                     is_program5_open = False
                 
-                # #key 6
-                # if data[i] == "y" and is_program6_open == False:
-                #     is_program6_open = True
-                #     if is_macro_on6:
-                #         print("macro!")
-                #         keyboard.write(t6input)
-                #     else:
-                #         print("opening file!")
-                #         os.startfile(file_to_open6)
-                # elif data[i] == "n" and is_program6_open == True:
-                #     #print("button let go")
-                #     is_program6_open = False
+                #key 6
+                if data[i] == "w" and is_program6_open == False:
+                    is_program6_open = True
+                    print(data[i])
+                    if is_macro_on6:
+                        print("macro!")
+                        keyboard.write(t6input)
+                    else:
+                        print("opening file!")
+                        os.startfile(file_to_open6)
+                elif data[i] == "q" and is_program6_open == True:
+                    #print("button let go")
+                    is_program6_open = False
         else:
             print("connection failed! arduino possibly not plugged in?")
 
