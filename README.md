@@ -11,6 +11,7 @@
 hexakey is a simple software using the arduino framework. It communicates when a button is pressed from an arduino to a python script. This python script controls what this button does, whether it will open a file or be a text macro.
 
 # pictures of the hardware it self
+<img src="https://raw.githubusercontent.com/skskskye/macro-controller/main/images/PXL_20240405_145322807.jpg?token=GHSAT0AAAAAACQTDJTUWKNM4QNQED5T7UOWZQQDP4Q">
 
 # Libraries used
 The libaries used for hexakey are the following:
